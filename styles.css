@@ -1,0 +1,278 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Header Start */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: lightgrey;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.nasc-logo {
+  height: 60px;
+  width: 100%;
+}
+
+.header .request {
+  text-decoration: none;
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.request:hover {
+  text-decoration: underline;
+}
+/* Header End */
+
+/* Search Box Start */
+#search-cont {
+  background-color: lightyellow;
+  height: 300px;
+  padding: 0 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.search-title {
+  font-size: 32px;
+  margin-bottom: 15px;
+  text-shadow: 1px 1px 20px white;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-box > input {
+  flex: 1;
+  height: 40px;
+  border-radius: 20px;
+  font-size: 18px;
+  padding: 0 15px;
+  border: 1px solid black;
+  transition: box-shadow 0.3s ease;
+}
+
+.search-box > input:focus {
+  outline: none;
+  box-shadow: 0 0 5px black;
+}
+
+.search-box > button {
+  width: 50px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 18px;
+  margin-left: -50px;
+  transition: background-color 0.3s ease;
+}
+
+.search-box > button > i {
+  color: black;
+}
+
+.search-box > button > i:hover {
+  color: darkred;
+}
+
+#suggestions {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  max-height: 200px; /* Adjust as needed */
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: none;
+  overflow-y: auto;
+}
+/* Add this CSS to your existing CSS */
+
+.highlighted {
+  background-color: #ddd;
+}
+
+/* Highlight selected suggestion */
+.suggestion-item.highlight {
+  background-color: #ddd;
+}
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #f1f1f1;
+}
+
+.suggestion-item.active {
+  background-color: #ddd;
+}
+
+/* Media Queries */
+@media (max-width: 525px) {
+  .search-box > input {
+    width: calc(100% - 60px);
+    min-width: 150px;
+  }
+
+  .search-box > button {
+    margin-left: 0;
+  }
+}
+
+/* Grid Start */
+.main-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 30px 30px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-grid > a {
+  color: black;
+  text-decoration: none;
+  border: 2px solid black;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 25px;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.main-grid > a:hover {
+  background-color: black;
+  color: white;
+  transform: scale(1.05);
+}
+
+.main-grid > a:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px black;
+}
+
+.main-grid > a:active {
+  transform: scale(0.95);
+}
+
+.main-grid > a::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.main-grid > a:hover::before {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.main-grid > a > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .main-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 525px) {
+  .main-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .search-box > input {
+    width: calc(100% - 60px);
+    min-width: 150px;
+  }
+}
+/* Grid End */
+
+/* FAQ Section Start */
+#faq-section {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 800px;
+  display: none;
+}
+
+#faq-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+#faq-content {
+  margin-top: 20px;
+}
+
+#faq-content h3 {
+  font-size: 20px;
+  margin: 10px 0;
+  color: #333;
+}
+
+#faq-content blockquote {
+  font-size: 16px;
+  margin: 20px 0; /* Increased margin for spacing */
+  color: #555;
+  padding: 10px 20px;
+  border-left: 5px solid #007BFF;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  line-height: 1.6;
+}
+
+/* Add a border and padding to each question and answer */
+#faq-content > * {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+#faq-content > *:last-child {
+  border-bottom: none;
+}
+
+/* Styling for question number */
+#faq-content .question-number {
+  font-weight: bold;
+  margin-right: 10px;
+}
