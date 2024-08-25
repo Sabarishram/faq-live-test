@@ -276,3 +276,10 @@ body {
   font-weight: bold;
   margin-right: 10px;
 }
+
+.suggestion-item.no-results {
+  color: gray;
+  font-style: italic;
+  text-align: center;
+  cursor: default;
+}
