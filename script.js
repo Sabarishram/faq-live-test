@@ -73,15 +73,16 @@ const faqData = {
         { question: "Are there any fees for the festivals that are being conducted?", answer: "Fees may apply for certain events and activities. Check the event details for information on registration fees or tickets." }
     ],
     "College Details": [
-        { question: "Who is the current principal of the college?", answer: "The current principal of the college is Dr. A. Kumar. You can find more details about the administration on our website." },
+        { question: "Who is the current principal of the college?", answer: "The current principal of the college is Dr. B. Anirudhan." },
         { question: "How many students are currently enrolled in the college?", answer: "Currently, the college has approximately 5000 students enrolled across various programs." },
-        { question: "How is the college ranked nationally and internationally?", answer: "The college is ranked among the top 50 institutions nationally and has received international recognition for its academic programs." },
-        { question: "What is the college’s mission and vision?", answer: "Our mission is to provide quality education and foster holistic development. Our vision is to be a leader in academic and research excellence." },
+        { question: "How is the college ranked nationally and internationally?", answer: "<b>National Rankings :</b> The college is ranked within the 100-150 range according to the NIRF (National Institutional Ranking Framework).It has been awarded an A+ grade by NAAC.The college is recognized under UGC 2(f) & 12(B). It is also a part of the Star College Scheme by the Government of India.<br/> <b>International Rankings :</b> The college holds ISO certifications: 9001:2015 and 14001:2004. " },
+        { question: "What is the college’s Long term goal?", answer: "Our mission is to provide quality education and foster holistic development. Our vision is to be a leader in academic and research excellence." },
         { question: "Are there any research programs or projects offered?", answer: "Yes, the college offers various research programs and projects in collaboration with national and international institutions." },
         { question: "Are there any student exchange programs?", answer: "Yes, the college has partnerships with several universities for student exchange programs." },
         { question: "Does the college have Wi-Fi for students?", answer: "Yes, Wi-Fi is available across the campus and hostels for students." },
         { question: "How does the college promote entrepreneurship and innovation?", answer: "The college promotes entrepreneurship through incubators, workshops, and collaboration with startups and industry experts." },
-        { question: "Where is the college located?", answer: "The college is located in [City], [State]. Detailed address and directions are available on our website." },
+        {question: "Where is the college located?",
+        answer: 'The college is located in Thirumalayampalayam, Tamil Nadu - 641105 and you can view it on the map <a href="https://maps.app.goo.gl/PPFT36nXLZfE9Wko7" target="_blank" style = "color : black" >HERE</a>.'},
         { question: "What tier does the college belong to?", answer: "The college is classified as a Tier 1 institution based on its academic performance and infrastructure." }
     ],
     "Academic": [
@@ -106,73 +107,78 @@ document.addEventListener('DOMContentLoaded', function () {
     const faqContent = document.getElementById('faq-content');
     let selectedIndex = -1;
 
+    //Displaying the Questions and answers from the category.  
     function displayFAQ(category) {
-        faqContent.innerHTML = '';
-
+        faqContent.innerHTML = ''; // Clear previous content
+    
         if (faqData[category]) {
-            faqTitle.textContent = category;
+            faqTitle.textContent = category; // Set category title
             faqData[category].forEach((item, index) => {
                 const questionElement = document.createElement('h3');
                 const answerElement = document.createElement('blockquote');
-
+    
                 questionElement.innerHTML = `<span class="question-number">${index + 1}.</span> ${item.question}`;
-                answerElement.textContent = item.answer;
-
+                answerElement.innerHTML = item.answer; // Use innerHTML to render HTML content
+    
                 faqContent.appendChild(questionElement);
                 faqContent.appendChild(answerElement);
             });
-
+    
             faqSection.style.display = 'block';
             document.documentElement.scrollTop = faqSection.offsetTop;
         }
     }
 
+    // Displaying the question and answer from the search box
     function showFAQByQuestion(question) {
-        faqContent.innerHTML = '';
+    faqContent.innerHTML = ''; // Clear previous content
 
-        let found = false;
+    let found = false;
 
-        for (const category in faqData) {
-            if (faqData.hasOwnProperty(category)) {
-                const item = faqData[category].find(item => item.question.toLowerCase() === question.toLowerCase());
-                if (item) {
-                    faqTitle.textContent = category;
-                    const questionElement = document.createElement('h3');
-                    const answerElement = document.createElement('blockquote');
+    for (const category in faqData) {
+        if (faqData.hasOwnProperty(category)) {
+            const item = faqData[category].find(item => item.question.toLowerCase() === question.toLowerCase());
+            if (item) {
+                faqTitle.textContent = category;
+                const questionElement = document.createElement('h3');
+                const answerElement = document.createElement('blockquote');
 
-                    questionElement.innerHTML = `<span class="question-number">1.</span> ${item.question}`;
-                    answerElement.textContent = item.answer;
+                questionElement.innerHTML = `<span class="question-number">1.</span> ${item.question}`;
+                answerElement.innerHTML = item.answer; // Ensure HTML content is rendered
 
-                    faqContent.appendChild(questionElement);
-                    faqContent.appendChild(answerElement);
+                faqContent.appendChild(questionElement);
+                faqContent.appendChild(answerElement);
 
-                    faqSection.style.display = 'block';
-                    document.documentElement.scrollTop = faqSection.offsetTop;
+                faqSection.style.display = 'block';
+                document.documentElement.scrollTop = faqSection.offsetTop;
 
-                    found = true;
-                    break;
-                }
+                found = true;
+                break;
             }
-        }
-
-        if (!found) {
-            faqSection.style.display = 'none';
         }
     }
 
+    if (!found) {
+        faqSection.style.display = 'none';
+    }
+}
+
+
+    // Displaying the suggestion question
     function showSuggestions(query) {
-        suggestionsContainer.innerHTML = '';
+    suggestionsContainer.innerHTML = ''; // Clear previous suggestions
 
-        if (query.length > 0) {
-            let matchedQuestions = [];
+    if (query.length > 0) {
+        let matchedQuestions = [];
 
-            for (const category in faqData) {
-                if (faqData.hasOwnProperty(category)) {
-                    const filteredQuestions = faqData[category].filter(question => question.question.toLowerCase().includes(query.toLowerCase()));
-                    matchedQuestions = matchedQuestions.concat(filteredQuestions.map(question => ({ question: question.question, category })));
-                }
+        for (const category in faqData) {
+            if (faqData.hasOwnProperty(category)) {
+                const filteredQuestions = faqData[category].filter(question => question.question.toLowerCase().includes(query.toLowerCase()));
+                matchedQuestions = matchedQuestions.concat(filteredQuestions.map(question => ({ question: question.question, category })));
             }
+        }
 
+        if (matchedQuestions.length > 0) {
             matchedQuestions.forEach(item => {
                 const suggestionItem = document.createElement('div');
                 suggestionItem.className = 'suggestion-item';
@@ -183,12 +189,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
                 suggestionsContainer.appendChild(suggestionItem);
             });
-
-            suggestionsContainer.style.display = matchedQuestions.length > 0 ? 'block' : 'none';
         } else {
-            suggestionsContainer.style.display = 'none';
+            // Display "No questions available" message if no matches are found
+            const noResultsItem = document.createElement('div');
+            noResultsItem.className = 'suggestion-item no-results'; // You can style this differently with CSS
+            noResultsItem.textContent = 'No questions available. Submit a request';
+            suggestionsContainer.appendChild(noResultsItem);
         }
+
+        suggestionsContainer.style.display = 'block';
+    } else {
+        suggestionsContainer.style.display = 'none';
     }
+}
 
     function handleSearch() {
         const query = searchInput.value.trim();
@@ -216,19 +229,27 @@ document.addEventListener('DOMContentLoaded', function () {
         handleSearch();
     });
 
+    // Question Selection using arrow
     searchInput.addEventListener('keydown', (e) => {
+        const suggestionItems = suggestionsContainer.querySelectorAll('.suggestion-item');
+    
         if (e.key === 'Enter') {
             e.preventDefault();
-            handleSearch();
+            if (selectedIndex >= 0 && suggestionItems[selectedIndex]) {
+                // If a suggestion is selected, insert it into the search box
+                searchInput.value = suggestionItems[selectedIndex].textContent;
+                suggestionsContainer.style.display = 'none';
+                handleSearch(); // Optional: trigger search with the selected suggestion
+            } else {
+                handleSearch(); // Trigger search with current input if no suggestion is selected
+            }
         } else if (e.key === 'ArrowDown') {
-            const suggestionItems = suggestionsContainer.querySelectorAll('.suggestion-item');
             if (suggestionItems.length > 0) {
                 selectedIndex = (selectedIndex + 1) % suggestionItems.length;
                 updateSuggestionHighlight();
                 scrollSuggestionIntoView();
             }
         } else if (e.key === 'ArrowUp') {
-            const suggestionItems = suggestionsContainer.querySelectorAll('.suggestion-item');
             if (suggestionItems.length > 0) {
                 selectedIndex = (selectedIndex - 1 + suggestionItems.length) % suggestionItems.length;
                 updateSuggestionHighlight();
@@ -236,6 +257,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+    
+    
 
     document.addEventListener('click', (event) => {
         if (!document.querySelector('.search-box').contains(event.target)) {
