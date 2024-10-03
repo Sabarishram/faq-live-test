@@ -81,11 +81,13 @@ body {
   font-size: 18px;
   margin-left: -50px;
   transition: background-color 0.3s ease;
+  color: black;
 }
 
 .search-box > button > i {
   color: black;
 }
+
 
 .search-box > button > i:hover {
   color: darkred;
@@ -277,7 +279,7 @@ body {
   margin-right: 10px;
 }
 
-.suggestion-item.no-results {
+.suggestion-item.no-interaction {
   color: gray;
   font-style: italic;
   text-align: center;
